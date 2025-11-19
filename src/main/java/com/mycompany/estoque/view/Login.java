@@ -5,6 +5,7 @@
 package com.mycompany.estoque.view;
 
 import com.mycompany.estoque.dao.UsuarioDAO;
+import com.mycompany.estoque.database.Conexao;
 import com.mycompany.estoque.model.Usuario;
 import javax.swing.JOptionPane;
 
@@ -100,11 +101,20 @@ public class Login extends javax.swing.JFrame {
         
         Usuario usuarioLogado = uDAO.autenticar(email, senha);
         
+        
+
+        
         if (email.isEmpty() || senha.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Preencha todos os campos");
         }else if(usuarioLogado == null){
             JOptionPane.showMessageDialog(this, "Email ou Senha inválidos");
         }else{
+            
+        if (usuarioLogado.getRole().equals("ADMIN")) {
+            Conexao.definirCredenciais("admin", "admin123");
+        }else{
+            Conexao.definirCredenciais("colaborador", "colabora123");
+        }
             new Principal().setVisible(true);
             this.dispose();
         }

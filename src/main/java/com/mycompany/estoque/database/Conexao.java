@@ -13,9 +13,15 @@ import java.sql.SQLException;
  * @author luizfkm
  */
 public class Conexao {
-    private static final String URL = "jdbc:postgresql://localhost:5432/db_estoque";
-    private static final String USER = "postgres";
-    private static final String PASSWORD = "120406";
+    private static  String URL = "jdbc:postgresql://localhost:5432/db_estoque";
+    private static  String USER = "postgres";
+    private static  String PASSWORD = "120406";
+    
+    
+    public static void definirCredenciais(String usuario, String senha){
+        USER = usuario;
+        PASSWORD = senha;
+    }
     
     public static Connection getConnection(){
         try{
